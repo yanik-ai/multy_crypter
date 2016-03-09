@@ -23,27 +23,27 @@ class CaesarCiphers(object):
             Encode giving message by shifting character to right
             for number of giving steps
         """
-        result = ''
+        result = []
         for ch in msg.upper():
             if ch in self.allowed_characters:
-                i = (self.alphabet[ch.upper()] + self.steps) % self.alphabet_len
-                result += self.inveresed_alphabet[i]
+                i = (self.alphabet[ch] + self.steps) % self.alphabet_len
+                result.append(self.inveresed_alphabet[i])
             elif ch in whitespace:
                 # no need to encode whitespaces
-                result += ch
-        return result
+                result.append(ch)
+        return ''.join(result)
 
     def decode(self, msg):
         """
             Decode giving message by shifting character to right
             for number of giving steps
         """
-        result = ''
+        result = []
         for ch in msg:
             if ch in whitespace:
                 # no need to decode whitespaces
-                result += ch
+                result.append(ch)
             else:
                 i = (self.alphabet[ch.upper()] - self.steps) % self.alphabet_len
-                result += self.inveresed_alphabet[i]
-        return result
+                result.append(self.inveresed_alphabet[i])
+        return ''.join(result)

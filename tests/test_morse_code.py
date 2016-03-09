@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*
 from __future__ import unicode_literals
 
 import unittest
@@ -15,21 +14,15 @@ class MorseCodeTest(TestCase):
 
     def test_encrypt(self):
         """ Basic text encryption """
-        plain = 'This is one small step for a man one giant leap for mankind'
-        cipher = '- .... .. ... −···− .. ... −···− --- -. . −···− ... -- .- .-..' \
-                 ' .-.. −···− ... - . .--. −···− ..-. --- .-. −···− .- −···− -- .- -.' \
-                 ' −···− --- -. . −···− --. .. .- -. - −···− .-.. . .- .--. −···− ..-. --- ' \
-                 '.-. −···− -- .- -. -.- .. -. -.. '
-        self.assertEqual(cipher, self.morse.encode(plain))
+        plain_text = 'Abc 1230, %^&'
+        cipher = '.- -... -.-. / .---- ..--- ...-- ----- --..--'
+        self.assertEqual(cipher, self.morse.encode(plain_text))
 
     def test_decrypt(self):
         """ Basic text decryption """
-        plain = 'This is one small step for a man one giant leap for mankind'
-        cipher = '- .... .. ... −···− .. ... −···− --- -. . −···− ... -- .- .-..' \
-                 ' .-.. −···− ... - . .--. −···− ..-. --- .-. −···− .- −···− -- .- -.' \
-                 ' −···− --- -. . −···− --. .. .- -. - −···− .-.. . .- .--. −···− ..-. --- ' \
-                 '.-. −···− -- .- -. -.- .. -. -.. '
-        self.assertEqual(plain.upper(), self.morse.decode(cipher))
+        plain_text = 'Abc 1230,'
+        cipher = '.- -... -.-. / .---- ..--- ...-- ----- --..--'
+        self.assertEqual(plain_text.upper(), self.morse.decode(cipher))
 
     def test_encrypt_and_decrypt_full_alphabet(self):
         """
@@ -45,7 +38,8 @@ class MorseCodeTest(TestCase):
         """ Encoding should skip unknown characters """
         plain_text = 'This is Sparta!@#$%&*(),'
         # plain text except unknown characters
-        clean_plain = ''.join(ch for ch in plain_text if ch in self.morse.allowed_characters)
+        clean_plain = ''.join(ch for ch in plain_text.upper() if ch in
+                              self.morse.allowed_characters)
         plain_cipher = self.morse.encode(plain_text)
         clean_plain_cipher = self.morse.encode(clean_plain)
         self.assertEqual(plain_cipher, clean_plain_cipher)

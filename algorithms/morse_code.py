@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*
 from __future__ import unicode_literals
-from string import ascii_letters, digits, whitespace
 
 
 class MorseCode(object):
@@ -22,23 +21,27 @@ class MorseCode(object):
         self.allowed_characters = ''.join(ch for ch in self.alphabet.keys())
 
     def encode(self, msg):
-        result = ''
-        for ch in msg[:].upper():
-            # check if we know about this character
-            if ch in self.allowed_characters:
-                print('## ', ch, self.alphabet[ch.upper()])
-                result += self.alphabet[ch.upper()] + ' '
-            # skip unknown characters
-        return result
+        result = []
+        words = msg.upper().split()
+        for word in words:
+            # jar for collecting morse characters
+            morse_ch = []
+            for ch in word:
+                # check if we know about this character
+                if ch in self.allowed_characters:
+                    morse_ch.append(self.alphabet[ch])
+                # skip unknown characters
+            if len(morse_ch) > 0:
+                result.append(' '.join(morse_ch))
+        return ' / '.join(result)
 
     def decode(self, msg):
-        result = ''
+        result = []
         words = msg.split('/')
         for word in words:
-            print("# decoding ", word)
             morse_letters = word.split()
             letter = ''.join([self.inveresed_alphabet[l] for l in morse_letters])
-            result += ' ' + letter
-        return result
+            result.append(letter)
+        return ' '.join(result)
 
 

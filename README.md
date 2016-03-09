@@ -18,8 +18,8 @@ Simple CLI allows you to choose between algorithms and decode/encode action.
 
 ### Optional parameters
 - `--help` gives you help about all parameters
-- `--alg` -- choose one of encryption/decryption algorithms (setup to `morse` by default)
-- `--action` -- `encrypt` or `decrypt` (setup to `encrypt` by default)
+- `--alg` -- choose between `morse` and `caesar` algorithms (`morse` is default)
+- `--action` -- `encrypt` or `decrypt` (`encrypt` is default)
 
 ## Running tests
 `python3 -m unittest` (or `python -m unittest discover` for Python 2)
